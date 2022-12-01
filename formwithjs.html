@@ -19,12 +19,12 @@
             <span class="inr"></span><br>
             <select name="City" id="hometown">
                 <option value=""selected disabled>Select city</option>
-                <option value="">Ajmer</option>
-                <option value="">Alwar</option>
-                <option value="">Bundi</option>
-                <option value="">jaipur</option>
-                <option value="">Kota</option>
-                <option value="">Udaipur</option>
+                <option value="Ajmer">Ajmer</option>
+                <option value="Alwar">Alwar</option>
+                <option value="Bundi">Bundi</option>
+                <option value="jaipur">jaipur</option>
+                <option value="kota">Kota</option>
+                <option value="Udaipur">Udaipur</option>
                 </select>       
                 <span class="inr"></span><br>
                 <button type="submit">Submit</button>
@@ -39,7 +39,7 @@
             let age = document.querySelector("#age")
             let phone = document.querySelector("#phone")
             let email = document.querySelector("#email")
-            let radio = document.querySelectorAll(".gender")
+            let radio = document.querySelectorAll(".Gender")
             let hometown = document.querySelector("#hometown")
 
             let nameExp = /^[a-zA-Z ]{3,30}$/
@@ -52,7 +52,9 @@
                     if(matchElement(phone,phoneExp,"Enter excat 10digit")){
                         if(matchElement(email,emailExp,"Enter valid email ID")){
                             if(matchElement2(radio,"Select Gender")){
-
+                                if(matchElement3(hometown,"select any one city")){
+                                    document.querySelector("form").submit();
+                                }
                             }
                         }
                     }
@@ -65,12 +67,12 @@
         function matchElement(element,regex,msg){
             if(element.value.match(regex)){
                 element.nextElementSibling.innerHTML = '';
-                element.classList.remove("input");
+                element.classList.remove("inputred");
                 return true;
             }
             else{
                 element.nextElementSibling.innerHTML = msg;
-                element.classList.add("input");
+                element.classList.add("inputred");
                 element.focus();
                 return false;
             }
@@ -85,6 +87,7 @@
           flag = true;
         }
       })
+    //  console.log( elements)
       if(flag === false){
         Array.from(elements)[elements.length - 1].nextElementSibling.innerHTML = msg;
         return false;
@@ -93,6 +96,20 @@
         Array.from(elements)[elements.length - 1].nextElementSibling.innerHTML = '';
         return true;
       }
+    }
+
+    function matchElement3(element,msg){
+        if(element.value.length === 0){
+           element.nextElementSibling.innerHTML = msg;
+           element.classList.add("inputred");
+           return false; 
+        }
+        else{
+            element.nextElementSibling.innerHTML = ' ';
+            element.classList.remove("inputred")
+            return true;
+           
+        }
     }
     
 
